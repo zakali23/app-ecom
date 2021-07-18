@@ -1,0 +1,45 @@
+user:
+  firstName:
+    not_blank: Veuillez saisir un Prénom.
+    length:
+      min: Votre prénom doit comporter au moins {{limit}} caractères.
+      max: Votre prénom ne peut pas comporter plus de {{limit}} caractères.
+
+  lastName:
+    not_blank: Veuillez saisir un Nom.
+    length:
+      min: Votre nom doit comporter au moins {{limit}} caractères.
+      max: Votre nom ne peut pas comporter plus de {{limit}} caractères.
+
+  email:
+    not_blank: Veuillez saisir un Email.
+    e_mail: L'email saisi '{{ value }}' n'est pas valide.
+    unique: L'email exist déjà
+  country:
+    type: la valeur doit etre une chaine de caractères.
+  news:
+    not_blank: Veuillez saisir un news.
+    type: la valeur doit etre {{ type }}
+
+product:
+  name:
+    not_blank: Veuillez saisir un nom du produit.
+    type: la valeur doit etre {{ type }}
+    length:
+      min: Le nom doit comporter au moins {{ limit }} caractères.
+      max: Le nom ne peut pas comporter plus de {{ limit }} caractères.
+
+  price:
+    type: la valeur doit etre un chiffre.
+    positive: la valeur doit etre positif
+    not_blank: Veuillez saisir un prix
+
+  description:
+    not_blank: Veuillez saisir la description
+    type: la valeur doit etre {{ type }}
+    length:
+      min: La description doit comporter au moins {{ limit }} caractères.
+
+  date:
+    message: Format de la date est invalide
+
