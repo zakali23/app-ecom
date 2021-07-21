@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login</title>
+		{{ encore_entry_link_tags('app') }}
+		{{ encore_entry_script_tags('app') }}
+	</head>
+	<body class="bg-gray-200 flex content-center justify-center items-center h-full">
+		<div class="flex flex-col justify-center items-center">
+			<img src="/images/logo.svg" class="w-24 md:h-auto mb-8" alt="logo"/>
+			<h1 class="text-2xl uppercase font-medium mb-8">Votre identifiant pour nous rejoindre</h1>
+			<div>
+				<form class="flex content-center justify-center items-center" method="post">
+					<input type="text" id="inputEmail" name="email" placeholder="input" value="{{ last_username }}"/>
+					<input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
