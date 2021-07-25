@@ -1,0 +1,6 @@
+PasswordType:
+  first_options:
+    placeholder: Nouveau mot de passe
+  second_options:
+    placeholder: Confirmez votre mot de passe
+  invalid_message: Le mot de passe n'est pas correct

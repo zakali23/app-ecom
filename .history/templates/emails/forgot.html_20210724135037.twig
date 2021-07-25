@@ -1,0 +1,16 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+	</head>
+	<body>
+		<p>non :
+			{{ firstName }}
+			{{ lastName }}</p>
+		<p>Une demande de réinitialisation du mot de passe a été effectuée,vous avez un delai de 15 minutes pour effectuer le changement
+		</p>
+		<a href="{{ absolute_url(path('app_changePassword_credentials',{token:token.tokenGenerate})) }}" target="_blank">Réinitialiser mon mot de passe</a>
+	</body>
+</html>

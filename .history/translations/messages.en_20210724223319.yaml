@@ -1,0 +1,32 @@
+form:
+  types:
+    emailType:
+      placeholder: Your email ...
+    passwordType:
+      notBlank: Please enter an password
+      length:
+        min: Your last password must be at least {{ limit }} characters long.
+        max: Your last password cannot be longer than {{ limit }} characters.
+      invalid_message: The password fields must match
+      first_options:
+        placeholder: New password
+      second_options:
+        placeholder: Password confirmation
+
+pages:
+  login:
+    title: Your username to join us
+    email: Email
+    password: Password
+    session: keep my session open
+    forgot_password: Forgot your password ?
+    informations: By logging in, you agree to abide by the Privacy Policy and Terms and Conditions of our site
+    button_send: Connexion
+    question: You are not a member yet ?
+    join: Join us
+  forgot:
+    title: RESET YOUR PASSWORD ?
+    informations: Enter your email address to receive instructions on how to reset your password.
+    button_send: validate
+  reset:
+  register:

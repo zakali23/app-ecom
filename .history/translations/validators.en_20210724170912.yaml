@@ -1,0 +1,59 @@
+user:
+  firstName:
+    not_blank: Please enter an first name.
+    length:
+      min: Your first name must be at least {{ limit }} characters long.
+      max: Your first name cannot be longer than {{ limit }} characters.
+
+  lastName:
+    not_blank: Please enter an last ntame.
+    length:
+      min: Your last name must be at least {{ limit }} characters long.
+      max: Your last name cannot be longer than {{ limit }} characters.
+
+  email:
+    not_blank: Please enter an email.
+    e_mail: The email '{{ value }}' is not a valid email.
+    unique: the email is already exist
+
+  password:
+    not_blank: Please enter an password
+    length:
+      min: Your last password must be at least {{ limit }} characters long.
+      max: Your last password cannot be longer than {{ limit }} characters.
+
+  country:
+    type: The value most be a valid {{ type }}
+
+  news:
+    not_blank: Please enter an news.
+    type: The value most be a valid {{ type }}
+
+product:
+  name:
+    not_blank: Please enter an name of product.
+    type: The value most be a valid {{ type }}
+    length:
+      min: Name must be at least {{ limit }} characters long
+      max: The name cannot be longer than {{ limit }} characters.
+
+  price:
+    type: The value is not a valid {{ type }}.
+    positive: The value most be positive
+    not_blank: Please enter a price
+
+  description:
+    not_blank: Please enter a description
+    type: The value most be a valid {{ type }}
+    length:
+      min: Your description must be at least {{ limit }} characters long.
+
+  date:
+    message: Format date invalide
+
+PasswordType:
+  first_options:
+    placeholder: New password
+  second_options:
+    placeholder: Password confirmation
+  invalid_message: The password fields must match

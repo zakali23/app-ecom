@@ -1,0 +1,18 @@
+PasswordType:
+  first_options:
+    placeholder: Nouveau mot de passe
+  second_options:
+    placeholder: Confirmez votre mot de passe
+  invalid_message: Le mot de passe n'est pas correct
+pages:
+  login:
+    title: Votre identifiant pour nous rejoindre
+    session: Garder ma session ouverte
+    forgot_password: Mot de passe oublié ?
+    informations: En vous connectant, vous acceptez de vous conformer à la Politique de confidentialité et aux Conditions générales de notre site.
+    button_send: Connexion
+    question: Vous n'êtes pas encore membre ?
+    join: Join us
+  forgot:
+  reset:
+  register:

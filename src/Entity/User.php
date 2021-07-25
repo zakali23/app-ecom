@@ -38,6 +38,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="user.password.not_blank")
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 255,
+     *      minMessage = "user.password.length.min",
+     *      maxMessage = "user.password.length.max",
+     *      allowEmptyString = false
+     * )
      */
     private $password;
 
@@ -84,6 +92,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $forgotPasswordToken;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $forgotPasswordTokenRequestDate;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $forgotPasswordTokenMustBeVerifiedBefore;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $forgotPasswordTokenVerifiedDate;
+
 
     public function getId(): ?int
     {
@@ -242,6 +271,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getForgotPasswordToken(): ?string
+    {
+        return $this->forgotPasswordToken;
+    }
+
+    public function setForgotPasswordToken(?string $forgotPasswordToken): self
+    {
+        $this->forgotPasswordToken = $forgotPasswordToken;
+
+        return $this;
+    }
+
+    public function getForgotPasswordTokenRequestDate(): ?\DateTimeImmutable
+    {
+        return $this->forgotPasswordTokenRequestDate;
+    }
+
+    public function setForgotPasswordTokenRequestDate(?\DateTimeImmutable $forgotPasswordTokenRequestDate): self
+    {
+        $this->forgotPasswordTokenRequestDate = $forgotPasswordTokenRequestDate;
+
+        return $this;
+    }
+
+    public function getForgotPasswordTokenMustBeVerifiedBefore(): ?\DateTimeImmutable
+    {
+        return $this->forgotPasswordTokenMustBeVerifiedBefore;
+    }
+
+    public function setForgotPasswordTokenMustBeVerifiedBefore(?\DateTimeImmutable $forgotPasswordTokenMustBeVerifiedBefore): self
+    {
+        $this->forgotPasswordTokenMustBeVerifiedBefore = $forgotPasswordTokenMustBeVerifiedBefore;
+
+        return $this;
+    }
+
+    public function getForgotPasswordTokenVerifiedDate(): ?\DateTimeImmutable
+    {
+        return $this->forgotPasswordTokenVerifiedDate;
+    }
+
+    public function setForgotPasswordTokenVerifiedDate(?\DateTimeImmutable $forgotPasswordTokenVerifiedDate): self
+    {
+        $this->forgotPasswordTokenVerifiedDate = $forgotPasswordTokenVerifiedDate;
 
         return $this;
     }
