@@ -1,0 +1,44 @@
+form:
+  types:
+    emailType:
+      placeholder: Votre adresse email ...
+    passwordType:
+      not_blank: Veuillez saisir un mot de passe
+      length:
+        min: Votre mot de passe doit comporter au moins {{ limit }} caractères.
+        max: Votre mot de passe ne peut pas comporter plus de {{ limit }} caractères.
+      invalid_message: Le mot de passe n'est pas correct
+      first_options:
+        placeholder: Nouveau mot de passe
+      second_options:
+        placeholder: Confirmez votre mot de passe
+    textType:
+      firstName:
+        placeholder: First name
+      lastName:
+        placeholder: Last name
+pages:
+  login:
+    title: Votre identifiant pour nous rejoindre
+    email: Email
+    password: Mot de passe
+    session: Garder ma session ouverte
+    forgot_password: Mot de passe oublié ?
+    informations: En vous connectant, vous acceptez de vous conformer à la Politique de confidentialité et aux Conditions générales de notre site.
+    button_send: Connexion
+    question: Vous n'êtes pas encore membre ?
+    join: Rejoignez-nous.
+  forgot:
+    title: REINITIALISEZ VOTRE MOT DE PASSE ?
+    informations: Saisissez votre nouveau mot de passe. Confirmez votre mot de passe.
+    button_send: valider
+    span: Ou revenez à la page de
+    connexion: connexion
+  reset:
+    title: REINITIALISEZ VOTRE MOT DE PASSE
+    informations: Pour des raisons de securité, votre mot de passe doit contenir une lettre majuscule, une lettre majuscule, un chiffre dans un ordre aléatoire
+    button_send: valider
+  register:
+    title: Devenez membre E-COM
+    informations: Créez votre profil de Membre Nike et accédez au meilleur des produits, de l'inspiration et de la communauté Nike en avant-première.
+    birthday:

@@ -1,0 +1,48 @@
+form:
+  types:
+    emailType:
+      placeholder: Your email ...
+    passwordType:
+      not_blank: Please enter an password
+      length:
+        min: Your last password must be at least {{ limit }} characters long.
+        max: Your last password cannot be longer than {{ limit }} characters.
+      invalid_message: The password fields must match
+      first_options:
+        placeholder: New password
+      second_options:
+        placeholder: Password confirmation
+    textType:
+      firstName:
+        placeholder: First name
+      lastName:
+        placeholder: Last name
+    telType:
+      phone:
+        placeholder: Your number phone
+
+pages:
+  login:
+    title: Your username to join us
+    email: Email
+    password: Password
+    session: keep my session open
+    forgot_password: Forgot your password ?
+    informations: By logging in, you agree to abide by the Privacy Policy and Terms and Conditions of our site
+    button_send: Connexion
+    question: You are not a member yet ?
+    join: Join us
+  forgot:
+    title: RESET YOUR PASSWORD ?
+    informations: Enter your email address to receive instructions on how to reset your password.
+    button_send: Validate
+    span: Or return to the
+    connexion: login page
+  reset:
+    title: RESET YOUR PASSWORD
+    informations: For security reasons, your password must contain an uppercase letter, a lowercase letter, a number in random order
+    button_send: Validate
+  register:
+    title: DEVENEZ MEMBRE E-COM
+    informations: Create your Member profile and get first-hand access to the best of our products, inspiration and community.
+    birthday: Benefit from a reward reserved for E-COM Members each year for your birthday.

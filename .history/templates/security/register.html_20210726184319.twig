@@ -1,0 +1,121 @@
+{% extends 'security/baseSecurity.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+{% block body %}
+	{# form new user #}
+	{{form_start(form,{'attr': {'class': 'w-full max-w-md'}})}}
+	{# Logo #}
+	<div class="flex flex-wrap  my-2 ">
+		<div class="w-full px-3 flex justify-center items-center">
+			<img src="/images/logo.svg" class="w-24 md:h-auto mb-4" alt="logo"/>
+		</div>
+	</div>
+	{# form title #}
+	<div class="flex flex-wrap  mb-3 ">
+		<div class="w-full px-3 flex justify-center items-center">
+			<h1 class="text-2xl uppercase font-bold text-center max-w-md mb-4">{% trans %}pages.register.title{% endtrans %}</h1>
+		</div>
+	</div>
+	{# form informations #}
+	<div class="flex flex-wrap  mb-3 ">
+		<div class="w-full px-3 flex justify-center items-center">
+			<p class="text-md text-center text-gray-500 max-w mb-6">{% trans %}pages.register.informations{% endtrans %}
+			</p>
+		</div>
+	</div>
+	{# form input #}
+
+	<div class="flex flex-wrap 3">
+		<div class="w-full px-3">
+			{{form_widget(form.email,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			{{ form_errors(form.email,{'attr':{'class':'text-red-500 mb-3 text-xs italic'}}) }}
+			{{dump(form_errors(form.email))}}
+		</div>
+	</div>
+
+	<div class="flex flex-wrap  ">
+		<div class="w-full px-3">
+			{{form_widget(form.password.first,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.password.first) }}</p>
+		</div>
+	</div>
+
+	<div class="flex flex-wrap  ">
+		<div class="w-full px-3">
+			{{form_widget(form.password.second,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.password.second) }}</p>
+		</div>
+	</div>
+
+	<div class="flex flex-wrap  ">
+		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+			{{form_widget(form.firstName,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.firstName) }}</p>
+		</div>
+		<div class="w-full md:w-1/2 px-3">
+			{{form_widget(form.lastName,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.lastName) }}</p>
+		</div>
+	</div>
+
+	<div class="flex flex-wrap">
+		<div class="w-full px-3">
+			{{form_widget(form.birthday,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.birthday) }}</p>
+		</div>
+	</div>
+	<div class="flex flex-wrap ">
+		<div class="w-full px-3 flex justify-center items-center">
+			<p class="text-md text-center text-gray-500 max-w mb-6">{% trans %}pages.register.birthday{% endtrans %}
+			</p>
+		</div>
+	</div>
+	<div class="flex flex-wrap">
+		<div class="w-full px-3">
+			{{form_widget(form.phone,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.phone) }}</p>
+		</div>
+	</div>
+
+	<div class="flex flex-wrap">
+		<div class="w-full px-3 ">
+			{{form_widget(form.address,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.address) }}</p>
+		</div>
+	</div>
+	<div class="flex flex-wrap  mb-2">
+		<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+			{{form_widget(form.city,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.city) }}</p>
+		</div>
+		<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+			{{form_widget(form.codeZip,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.codeZip) }}</p>
+		</div>
+		<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+			{{form_widget(form.country,{'attr':{'class':'border shadow-inner py-3 px-4 text-gray-700 block w-full focus:shadow-outline mb-3'}})}}
+			<p class="text-red-500 text-xs italic">{{ form_errors(form.country) }}</p>
+		</div>
+	</div>
+	<div class="flex flex-wrap">
+		<div class="w-full px-3 mb-8">
+			<label class="flex items-center">
+				{{form_widget(form.is_ab_nltr,{'attr':{'class':'checkbox-form'}})}}
+				<span class="ml-2 text-md text-center text-gray-500">
+					{% trans %}pages.register.newsletter{% endtrans %}
+				</span>
+			</label>
+		</div>
+	</div>
+	<div class="flex flex-wrap">
+		<div class="w-full px-3 ">
+			<button type="submit" class="bg-black text-white w-full h-12 px-6 text-indigo-100  mb-3" type="submit">{% trans %}pages.reset.button_send{% endtrans %}</button>
+		</div>
+	</div>
+	<p class="flex justify-center text-gray-500 text-xs">{% trans %}pages.register.question{% endtrans %}
+		&nbsp<a class="text-gray-600 text-xs underline" href="{{ path('register') }}">{% trans %}pages.register.connexion{% endtrans %}</a>
+	</p>
+
+	{{form_end(form)}}
+{% endblock %}
