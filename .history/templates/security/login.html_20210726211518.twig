@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="flex content-center justify-center items-center mt-8">
+	{% include "header/index.html.twig" %}
+	<div class="flex content-center justify-center items-center">
 		<div class="flex flex-col justify-center items-center w-full max-w-md">
 			<img src="/images/logo.svg" class="w-24 md:h-auto mb-8" alt="logo"/>
 			<h1 class="text-2xl uppercase font-bold text-center max-w-md mb-8">{% trans %}pages.login.title{% endtrans %}</h1>
@@ -14,7 +14,7 @@
 					{% if error %}
 						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}
-					<input type="text" id="inputEmail" name="email" placeholder="{% trans%}pages.login.email{% endtrans %}" value="{{ last_username }}" class="border shadow-inner py-2 px-3 text-gray-700 w-80 focus:shadow-outline mb-3"/>
+					<input type="text" id="inputEmail" name="email" placeholder="{% trans%}pages.login.email{% endtrans %}" value="{{ last_username }}" class="border shadow-inner py-2 px-3 text-gray-700  focus:shadow-outline mb-3"/>
 					<span class=" w-80 text-red-500 text-sm px-1 mb-3" id="error-email"></span>
 
 					<input type="password" name="password" id="inputPassword" placeholder="{% trans%}pages.login.password{% endtrans %}" autocomplete="current-password" class="border shadow-inner py-2 px-3 text-gray-700 w-80 focus:shadow-outline mb-3">

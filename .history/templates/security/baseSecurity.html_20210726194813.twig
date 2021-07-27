@@ -20,8 +20,6 @@
 	{% block javascripts %}
 		{{ encore_entry_script_tags('app') }}
 	{% endblock %}
-	<body class="bg-gray-200  h-full">
-		{% include "header/index.html.twig" %}
-		{% block body %}{% endblock %}
-	</body>
-</html>
+	<body class="bg-gray-200  h-full"> {% block body %}{% endblock %}
+		</body>
+	</html>
