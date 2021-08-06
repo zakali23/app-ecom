@@ -1,0 +1,45 @@
+{% extends 'security/baseSecurity.html.twig' %}
+
+{% block title %}Login
+{% endblock %}
+
+{% block body %}
+
+	<div class="flex content-center justify-center items-center mt-8">
+		<div class="flex flex-col justify-center items-center w-full max-w-md">
+			<img src="/images/logo.svg" class="w-24 md:h-auto mb-8" alt="logo"/>
+			<h1 class="text-2xl uppercase font-bold text-center max-w-md mb-8">{% trans %}pages.login.title{% endtrans %}</h1>
+			<div>
+				<form class="flex flex-col content-center justify-center items-center" method="post">
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+					<input type="text" id="inputEmail" name="email" placeholder="{% trans%}pages.login.email{% endtrans %}" value="{{ last_username }}" class="border shadow-inner py-2 px-3 text-gray-700 w-80 focus:shadow-outline mb-3"/>
+					<span class=" w-80 text-red-500 text-sm px-1 mb-3" id="error-email"></span>
+
+					<input type="password" name="password" id="inputPassword" placeholder="{% trans%}pages.login.password{% endtrans %}" autocomplete="current-password" class="border shadow-inner py-2 px-3 text-gray-700 w-80 focus:shadow-outline mb-3">
+					<div class="flex justify-between items-start w-80 mb-3">
+						<div class="remember flex justify-start w-40">
+							<input type="radio" class="form-radio mt-2" name="_remember_me" value="personal">
+							<span class="text-sm px-1 mt-1 text-gray-500">{% trans %}pages.login.session{% endtrans %}</span>
+						</div>
+						<div class="forget">
+							<a class="text-sm text-gray-400 underline" href="{{ path('app_forgot_password')}}">{% trans %}pages.login.forgot_password{% endtrans %}</a>
+						</div>
+					</div>
+					<p class="w-80 text-gray-500 text-sm text-center mb-6">{% trans %}pages.login.informations{% endtrans %}</p>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<button class="bg-black text-white text-sm w-80 pt-2 pb-2 mb-3" type="submit">{% trans %}pages.login.button_send{% endtrans %}</button>
+					<p class="text-gray-500 text-sm">{% trans %}pages.login.question{% endtrans %}
+						<a class="text-gray-600 text-sm underline" href="{{ path('register') }}">{% trans %}pages.login.join{% endtrans %}</a>
+					</p>
+				</form>
+				<div class="flex justify-center items-center">
+					<a href=""><img src="/images/github.svg" class="w-8 md:h-auto mb-8" alt="logo"/></a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

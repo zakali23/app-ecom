@@ -130,6 +130,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $country;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $github_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -380,6 +385,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCountry(?string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getGithubId(): ?string
+    {
+        return $this->github_id;
+    }
+
+    public function setGithubId(?string $github_id): self
+    {
+        $this->github_id = $github_id;
 
         return $this;
     }

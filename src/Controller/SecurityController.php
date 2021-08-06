@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\GithubClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -11,6 +14,8 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/{_locale}/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -25,7 +30,19 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+    /**
+     * connect to app with github
+     * @Route("/connect/github", name="github_connect")
+     * @param ClientRegistry $clientRegistry
+     * @return RedirectResponse
+     */
+    public function connect(ClientRegistry $clientRegistry): RedirectResponse
+    {
 
+        /**@var GithubClient $client */
+        $client = $clientRegistry->getClient('github');
+        return $client->redirect(['read:user','user:email']);
+    }
     /**
      * @Route("/logout", name="app_logout")
      */
