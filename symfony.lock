@@ -124,6 +124,9 @@
     "league/oauth2-github": {
         "version": "3.0.0"
     },
+    "league/oauth2-google": {
+        "version": "4.0.0"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
         "recipe": {

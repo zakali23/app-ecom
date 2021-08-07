@@ -1,44 +1,46 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Zak
+ * Date: 06/08/2021
+ * Time: 20:27
+ */
+
 namespace App\Security;
 
+
 use App\Entity\User;
-use App\Security\Exceptions\EmailNotVerifiedException;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Security;
-use League\OAuth2\Client\Provider\GithubResourceOwner;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
-class GithubAuthenticator extends OAuth2Authenticator
+class GoogleAuthenticator extends OAuth2Authenticator
 {
-
     private $clientRegistry;
     private $entityManager;
     private $router;
-    private $encoder;
+
     /**
      * GithubAuthenticator constructor.
      * @param ClientRegistry $clientRegistry
      * @param EntityManagerInterface $entityManager
      * @param RouterInterface $router
      */
-    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $entityManager, RouterInterface $router,UserPasswordEncoderInterface $encoder)
+    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $entityManager, RouterInterface $router)
     {
         $this->clientRegistry = $clientRegistry;
         $this->entityManager = $entityManager;
         $this->router = $router;
-        $this->encoder = $encoder;
     }
 
     /**
@@ -52,7 +54,7 @@ class GithubAuthenticator extends OAuth2Authenticator
      */
     public function supports(Request $request): ?bool
     {
-        return 'oauth_check' ===$request->attributes->get('_route') && $request->get('service') === 'github';
+        return 'oauth_check' ===$request->attributes->get('_route') && $request->get('service') === 'google';
     }
 
     /**
@@ -68,54 +70,43 @@ class GithubAuthenticator extends OAuth2Authenticator
      *
      * @throws AuthenticationException
      */
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request):PassportInterface
     {
-        $client = $this->clientRegistry->getClient('github');
+        $client = $this->clientRegistry->getClient('google');
         $accessToken = $this->fetchAccessToken($client);
+
         return new SelfValidatingPassport(
             new UserBadge($accessToken, function() use ($accessToken, $client) {
-                
-                $githubUser = $client->fetchUserFromToken($accessToken);
+
+                $googleUser = $client->fetchUserFromToken($accessToken);
                 // 1) have they logged in with Facebook before? Easy!
-                $existingUser = $this->entityManager->getRepository('App:User')->findOneBy(['github_id' => $githubUser->getId()]);
+                $existingUser = $this->entityManager->getRepository('App:User')->findOneBy(['google_id' => $googleUser->getId()]);
+
+                $verificationUser= $googleUser->toArray();
+                if($verificationUser['email_verified']===false){
+                    throw new EmailNotVerifiedException();
+                }
 
                 if ($existingUser) {
                     return $existingUser;
                 }
-                // get email by api github
-                $response = HttpClient::create()->request(
-                    'GET',
-                    'https://api.github.com/user/emails',
-                    [
-                        'headers'=>[
-                            'authorization' => "token {$accessToken->getToken()}"
-                        ]
-                    ]
-                );
-                $emails = json_decode($response->getContent(),true);
-                foreach ($emails as $email){
-                    if( $email['primary']=== true && $email['verified']===true){
-                        $data = $githubUser->toArray();
-                        $data['email'] = $email['email'];
-                        $githubUser = new GithubResourceOwner($data);
-                    }
-                }
-                if($githubUser->getEmail() === null){
-                    throw new EmailNotVerifiedException();
-                }
-                $user = $this->entityManager->getRepository('App:User')->findOneBy(['email' => $githubUser->getEmail()]);
+                // add user
+                $user = $this->entityManager->getRepository('App:User')->findOneBy(['email' => $googleUser->getEmail()]);
                 if($user){
-                    $user->setGithubId($githubUser->getId());
+                    $user->setGoogleId($googleUser->getId());
                     $this->entityManager->flush();
                     return $user;
                 }
+
                 $user = new User();
-                $user->setGithubId($githubUser->getId())
-                     ->setEmail($githubUser->getEmail())
-                     ->setRoles(['ROLE_USER'])
-                     ->setIsAbNltr(false)
-                     ->setPassword($this->encoder->encodePassword($user,$this->generateRandomString(24)))
-                     ->setRegisterDat(new \DateTimeImmutable('now'));
+                $user->setGoogleId($googleUser->getId())
+                    ->setEmail($googleUser->getEmail())
+                    ->setFirstName($googleUser->getFirstName())
+                    ->setLastName($googleUser->getLastName())
+                    ->setRoles(['ROLE_USER'])
+                    ->setIsAbNltr(false)
+                    ->setPassword($this->encoder->encodePassword($user,$this->generateRandomString(24)))
+                    ->setRegisterDat(new \DateTimeImmutable('now'));
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
@@ -123,7 +114,6 @@ class GithubAuthenticator extends OAuth2Authenticator
             })
         );
     }
-
     private function generateRandomString($length) {
         return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
     }

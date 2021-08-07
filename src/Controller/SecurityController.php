@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\Provider\GithubClient;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -43,6 +46,21 @@ class SecurityController extends AbstractController
         $client = $clientRegistry->getClient('github');
         return $client->redirect(['read:user','user:email']);
     }
+
+    /**
+     * connect to app with github
+     * @Route("/connect/google", name="google_connect")
+     * @param ClientRegistry $clientRegistry
+     * @return RedirectResponse
+     */
+    public function connectGoogle(ClientRegistry $clientRegistry): RedirectResponse
+    {
+
+        /**@var GithubClient $client */
+        $client = $clientRegistry->getClient('google');
+        return $client->redirect();
+    }
+
     /**
      * @Route("/logout", name="app_logout")
      */

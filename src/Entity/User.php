@@ -135,6 +135,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $github_id;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $google_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -399,5 +404,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->github_id = $github_id;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * @param mixed $google_id
+     */
+    public function setGoogleId($google_id): void
+    {
+        $this->google_id = $google_id;
     }
 }
