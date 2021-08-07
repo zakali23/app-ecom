@@ -1,7 +1,19 @@
-<nav class="bg-gray-100 top-nav bg-white flex justify-end items-center">
-	<div class="aide flex mx-3 my-3 pr-4">
-		<a href="#" class=" px-2 border-r-2 border-gray-600 text-sm capitalize   ">help</a>
-		<a href="{{ path('register') }}" class="px-2 border-r-2 border-gray-600 text-sm capitalize  ">register</a>
-		<a href="{{ path('app_login') }}" class="px-2 text-sm capitalize ">login</a>
+<nav class="bg-gray-100 top-nav bg-white flex justify-between">
+	<div class=" flex justify-start items-center mx-3 my-3 pl-4">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+			<path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+		</svg>
+        {% endif %}
+	</div>
+
+	<div class="aide flex justify-end items-center mx-3 my-3 pr-4">
+		<a href="#" class=" px-2 border-r-2 border-gray-600 text-sm capitalize   ">{% trans %}pages.header.help{% endtrans %}</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a href="{{ path('app_logout') }}" class="px-2 text-sm capitalize ">{% trans %}pages.header.logout{% endtrans %}</a>
+		{% else %}
+		<a href="{{ path('register') }}" class="px-2 border-r-2 border-gray-600 text-sm capitalize  ">{% trans %}pages.header.register{% endtrans %}</a>
+		<a href="{{ path('app_login') }}" class="px-2 text-sm capitalize ">{% trans %}pages.header.login{% endtrans %}</a>
+		{% endif %}
 	</div>
 </nav>

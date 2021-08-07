@@ -27,6 +27,11 @@ form:
       phone:
         placeholder: Numéro de téléphone
 pages:
+  header:
+    help: Aide !
+    register: Rejoignez-nous
+    login: Connexion
+    logout: Deconnexion
   login:
     title: Rejoignez-nous
     email: Email

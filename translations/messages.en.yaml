@@ -28,6 +28,11 @@ form:
         placeholder: Number phone
 
 pages:
+  header:
+    help: Help !
+    register: Register
+    login: Login
+    logout: Logout
   login:
     title: Your username to join us
     email: Email
