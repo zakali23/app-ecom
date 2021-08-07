@@ -33,6 +33,16 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+    /**
+     * @Route("/login", name="redirection_login")
+     */
+    public function redi()
+    {
+
+
+        return $this->redirectToRoute('app_login');
+    }
     /**
      * connect to app with github
      * @Route("/connect/github", name="github_connect")
