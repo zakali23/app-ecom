@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_home")
+     * @Route("/{_locale}/",requirements={"_locale":"fr|en"}, name="app_home")
      */
     public function index()
     {

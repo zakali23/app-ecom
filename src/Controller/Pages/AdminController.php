@@ -14,4 +14,13 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/index.html.twig');
     }
+    /**
+     * @Route("/admin", name="redirection_admin")
+     */
+    public function redi()
+    {
+
+
+        return $this->redirectToRoute('app_admin');
+    }
 }
